@@ -1,0 +1,163 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <f:view>
+    <h:head>
+        <meta charset="utf-8"> </meta>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> </meta>
+        <title>SPIG</title>
+
+<!--
+
+Sentra Template
+
+https://templatemo.com/tm-518-sentra
+
+-->
+<meta name="description" content=""> </meta>
+<meta name="viewport" content="width=device-width, initial-scale=1"> </meta>
+        <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
+
+        <h:outputStylesheet name="css/bootstrap.min.css"/>
+        <h:outputStylesheet name="css/bootstrap-theme.min.css"/>
+        <h:outputStylesheet name="css/fontAwesome.css"/>
+        <h:outputStylesheet name="css/light-box.css"/>
+        <h:outputStylesheet name="css/owl-carousel.css"/>
+        <h:outputStylesheet name="css/templatemo-style.css"/>
+
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet"/>
+
+        <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+    </h:head>
+
+            <h:body>
+
+
+
+                    <header class="nav-down responsive-nav hidden-lg hidden-md">
+                        <button type="button" id="nav-toggle" class="navbar-toggle" data-toggle="collapse" data-target="#main-nav">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <!--/.navbar-header-->
+                        <div id="main-nav" class="collapse navbar-collapse">
+                            <nav>
+                                <ul class="nav navbar-nav">
+                                    <li><a href="CreaInformadorHI.xhtml">Crear Informador</a></li>
+                                    <li><a href="#featured">Consultar informadores</a></li>
+                                    <li><a href="#projects">Eliminar</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </header>
+
+                    <div class="sidebar-navigation hidde-sm hidden-xs">
+                        <div class="logo">
+                            <a href="#">Admin-SP<em>IG</em></a>
+                        </div>
+                        <nav>
+                            <ul>
+                                <li>
+                                    <a href="#top">
+                                        <span class="rect"></span>
+                                        <span class="circle"></span>
+                                        Home
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="CreaInformadorHI.xhtml">
+                                        <span class="rect"></span>
+                                        <span class="circle"></span>
+                                        Crear Informador
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#projects">
+                                        <span class="rect"></span>
+                                        <span class="circle"></span>
+                                        Consultar Informadores
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#video">
+                                        <span class="rect"></span>
+                                        <span class="circle"></span>
+                                        Eliminar Informador
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                        <ul class="social-icons">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                            <li><a href="#"><i class="fa fa-rss"></i></a></li>
+                            <li><a href="#"><i class="fa fa-behance"></i></a></li>
+                        </ul>
+                    </div>
+
+
+                    <div class="page-content">
+                        <section id="contact" class="content-section">
+                            <div id="contact-content">
+                                <div class="section-heading">
+                                    <h1>
+                                        <div>Crear Informador</div>
+                                        <em>SPIG</em>
+                                    </h1>
+
+                                </div>
+                                <div class="section-content">
+                                    <h:form id="contact">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                              <fieldset>
+                                                  <p:inputText class="texto" id="nombre" value="#{registrarInformador.nombre}" required="true" placeholder="Nombre"  validatorMessage="Por favor ingresa tu nombre" requiredMessage="Por favor ingresa tu nombre"/>
+                                              </fieldset>
+                                            </div>
+                                            <div class="col-md-6">
+                                              <fieldset>
+                                                  <p:inputText class="texto" id="correo" value="#{registrarInformador.correo}" required="true" placeholder="Correo" validatorMessage="Debe ser un correo valido">
+                                                    <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                                                    <p:keyFilter regEx="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/>
+                                                  </p:inputText>
+                                              </fieldset>
+                                            </div>
+                                            <div class="col-md-12">
+                                              <fieldset>
+                                                <p:commandButton id="form-submit" class="texto btn" action="#{registrarInformador.agregaInformador()}" value="Registrar" style="margin-right:20px;" ajax="false"/>
+                                              </fieldset>
+                                            </div>
+                                        </div>
+                                        <p:growl id="growl" life="4000" />
+                                    </h:form>
+                                </div>
+                            </div>
+                        </section>
+                        <section class="footer">
+                            <p>Copyright &copy; 2019 SPIG.org</p>
+                        </section>
+                    </div>
+
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+                <!-- <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script> -->
+
+                <h:outputScript name="js/vendor/bootstrap.min.js"/>
+                <h:outputScript name="js/plugins.js"/>
+                <h:outputScript name="js/main.js"/>
+                <h:outputScript name="js/scroll.js"/>
+
+
+                <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
+
+            </h:body>
+        </f:view>
+</html>
