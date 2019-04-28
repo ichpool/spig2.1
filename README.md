@@ -1,2 +1,9 @@
 # spig2.0
-Segunda iteración
+
+### Miembros del equipo
+
+- Tulum Cerritos
+- Ricardo Desales
+- Lisandro Vazquez
+- Antonio 
+
