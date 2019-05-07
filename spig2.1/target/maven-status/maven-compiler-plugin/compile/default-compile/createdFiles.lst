@@ -1,6 +1,7 @@
 modelo/InformadorDAO.class
 auxiliares/FilterSession.class
 modelo/ComentaristaDAO.class
+controlador/EliminarInformador.class
 controlador/AgregarMarcador.class
 modelo/Informador.class
 modelo/TemaDAO.class

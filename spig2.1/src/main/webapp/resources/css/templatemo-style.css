@@ -415,20 +415,6 @@ header {
   display: block;
 }
 
-.Modern-Slider .item-1 .image {
-  background-image: url(../img/slide_1.jpg);
-}
-
-.Modern-Slider .item-2 .image {
-  background-image: url(../img/slide_2.jpg);
-}
-
-.Modern-Slider .item-3 .image {
-  background-image: url(../img/slide_3.jpg);
-}
-
-.Modern-Slider .PrevArrow:before{content:'\f104';}
-
 .Modern-Slider .item .image {
   animation: zoomin 12s ease-in-out infinite alternate;
   -webkit-animation: zoomin 12s ease-in-out infinite alternate;
@@ -921,7 +907,7 @@ header {
   text-align: center;
   width: 100%;
   bottom: 0;
-  position: absolute;
+  position: fixed;
 }
 
 .footer p {
@@ -1081,16 +1067,20 @@ header {
 
 
 #map {
-    width: 70%;
+    width: 80%;
     padding-top: 7%;
+    top: 30px;
+    height: 500px;
 }
 
 body {
-    background-image: url("resources/img/slide_3.jpg");
+    background-image: url("http://www.marquezestudioimagendigital.com/wp-content/uploads/2016/11/Cuetzalan-8671-Editar.jpg");
     height: 100%;
     background-position: initial;
     background-repeat: no-repeat;
     background-size: cover;
+    /*animation: zoomin 12s ease-in-out infinite alternate;
+    -webkit-animation: zoomin 12s ease-in-out infinite alternate;*/
 }
 
 .section-heading div {
@@ -1098,4 +1088,15 @@ body {
   font-weight: 700;
   text-shadow: 0 0 30px #000;
   color: #FFF;
+}
+
+.section-heading p {
+  font-style: normal;
+  font-weight: 700;
+  text-shadow: 0 0 30px #000;
+  color: #FFF;
+}
+
+td label {
+    color: #FFF;
 }
