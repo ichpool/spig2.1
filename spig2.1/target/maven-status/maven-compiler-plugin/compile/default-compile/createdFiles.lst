@@ -11,6 +11,7 @@ modelo/Tema.class
 modelo/Comentario.class
 auxiliares/SendEmail.class
 controlador/ActualizarComentario.class
+controlador/ConsultarInformador.class
 modelo/Marcador.class
 modelo/HibernateUtil.class
 modelo/MarcadorDAO.class

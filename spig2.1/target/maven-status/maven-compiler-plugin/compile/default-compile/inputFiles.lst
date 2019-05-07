@@ -4,6 +4,7 @@
 /home/n-droid/Documentos/6sem/ingenieria/2-iteracion/spig2.1/spig2.1/src/main/java/controlador/AgregarMarcador.java
 /home/n-droid/Documentos/6sem/ingenieria/2-iteracion/spig2.1/spig2.1/src/main/java/modelo/ComentarioDAO.java
 /home/n-droid/Documentos/6sem/ingenieria/2-iteracion/spig2.1/spig2.1/src/main/java/modelo/Comentario.java
+/home/n-droid/Documentos/6sem/ingenieria/2-iteracion/spig2.1/spig2.1/src/main/java/controlador/ConsultarInformador.java
 /home/n-droid/Documentos/6sem/ingenieria/2-iteracion/spig2.1/spig2.1/src/main/java/modelo/InformadorDAO.java
 /home/n-droid/Documentos/6sem/ingenieria/2-iteracion/spig2.1/spig2.1/src/main/java/auxiliares/FilterSession.java
 /home/n-droid/Documentos/6sem/ingenieria/2-iteracion/spig2.1/spig2.1/src/main/java/modelo/Marcador.java
