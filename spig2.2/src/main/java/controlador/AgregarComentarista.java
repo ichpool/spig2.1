@@ -5,7 +5,6 @@
  */
 package controlador;
 
-//import javax.mail.MessagingException;
 import auxiliares.FileToStringer;
 import modelo.InformadorDAO;
 import modelo.Comentario;
@@ -19,6 +18,8 @@ import javax.faces.bean.ManagedBean;
 import java.util.Random;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import modelo.Comentarista;
+import modelo.ComentaristaDAO;
 
 /**
  *
@@ -64,25 +65,21 @@ public class AgregarComentarista {
         this.passwdConf = passwd;
     }
 
-    // public void agregaComentarista(){
-    //     Comentarista new_comentarista = new Comentarista();
-    //     String contrasenia = nombre.toLowerCase() + Integer.toString(rn.nextInt() % 1000);
-    //     i.setContrasenia(contrasenia);
-    //     InformadorDAO udb = new InformadorDAO();
-    //     try {
-    //         udb.save(i);
-    //         FileToStringer fts = new FileToStringer();
-    //         String html_string = fts.readFile("informador_mail.html");
-    //         html_string = html_string.replace("[[nombre]]",nombre);
-    //         html_string = html_string.replace("[[password]]",contrasenia);
-    //         SendEmail.send("vazquezlisandro673c@gmail.com",
-    //                 "Bienvenido a SPIG",
-    //                 html_string);
-    //         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Registrado", null);
-    //         FacesContext.getCurrentInstance().addMessage(null, message);
-    //     } catch (Exception ex) {
-    //         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ya existe ese correo", null));
-    //         Logger.getLogger(RegistrarInformador.class.getName()).log(Level.SEVERE, null, ex);
-    //     }
-    // }
+    public void agregaComentarista(){
+        if(!passwd.equals(passwdConf)){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "No coinciden las contraseñas", null));
+            //Logger.getLogger(RegistrarInformador.class.getName()).log(Level.SEVERE, null, ex);
+            return;
+        }
+        Comentarista new_comentarista = new Comentarista(correo.toLowerCase(),nombre.toLowerCase(),passwd);
+        ComentaristaDAO udb = new ComentaristaDAO();
+        try {
+            udb.save(new_comentarista);
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Registrado", null);
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        } catch (Exception ex) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ya existe ese correo", null));
+            Logger.getLogger(RegistrarInformador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

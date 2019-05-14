@@ -114,15 +114,12 @@
                                 </div>
                                 <div class="section-content">
                                     <h:form rendered="#{empty user}" id="form" class="formulario">
-                                        <p:messages id="messages" showDetail="true" closable="true">
-                                            <p:autoUpdate />
-                                        </p:messages>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <p:inputText  class="texto" id="nombre" value="#{agregarComentarista.nombre}" required="true" placeholder="Nombre"  validatorMessage="Por favor ingresa tu nombre" requiredMessage="Por favor ingresa tu nombre"/> <br/>
                                             </div>
                                             <div class="col-md-6">
-                                                <p:password class="texto" id="contrasenia" value="#{agregarComentarista.passwd}" placeholder="Contrasenia" match="contr" required="true" validatorMessage="No coinciden las contrasenias"/>
+                                                <p:password class="texto" id="contrasenia" value="#{agregarComentarista.passwd}" placeholder="Contrasenia" match="confirmacion" required="true" validatorMessage="No coinciden las contrasenias"/>
                                             </div>
                                              <div class="col-md-6">
                                                  <p:inputText class="texto" id="correo" value="#{agregarComentarista.correo}" required="true" placeholder="Correo" validatorMessage="Debe ser un correo valido"></p:inputText>
@@ -134,6 +131,7 @@
                                                 <p:commandButton id="form-submit" class="texto btn" action="#{agregarComentarista.agregaComentarista()}" value="Registrame" ajax="false" />
                                             </div>
                                         </div>
+                                        <p:growl id="growl" life="4000" />
                                     </h:form>
                                 </div>
 

@@ -5,7 +5,6 @@
  */
 package controlador;
 
-//import javax.mail.MessagingException;
 import auxiliares.FileToStringer;
 import modelo.InformadorDAO;
 import modelo.Comentario;
@@ -49,8 +48,8 @@ public class RegistrarInformador {
     public void agregaInformador(){
         Random rn = new Random();
         Informador i = new Informador();
-        i.setNombre(nombre);
-        i.setCorreo(correo);
+        i.setNombre(nombre.toLowerCase());
+        i.setCorreo(correo.toLowerCase());
         String contrasenia = nombre.toLowerCase() + Integer.toString(rn.nextInt() % 1000);
         i.setContrasenia(contrasenia);
         InformadorDAO udb = new InformadorDAO();
