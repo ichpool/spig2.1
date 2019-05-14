@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 14/05/2019 01:28:26 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelo.Comentario" table="comentario" schema="public" optimistic-lock="version">
+        <id name="idcomentario" type="int">
+            <column name="idcomentario" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="comentarista" class="modelo.Comentarista" fetch="select">
+            <column name="comentarista" not-null="true" />
+        </many-to-one>
+        <many-to-one name="marcador" class="modelo.Marcador" fetch="select">
+            <column name="marcador" not-null="true" />
+        </many-to-one>
+        <property name="contenido" type="string">
+            <column name="contenido" not-null="true" />
+        </property>
+        <property name="calificacion" type="double">
+            <column name="calificacion" precision="17" scale="17" not-null="true" />
+        </property>
+        <set name="comentaristas" table="califica" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="comentario" not-null="true" />
+            </key>
+            <many-to-many entity-name="modelo.Comentarista">
+                <column name="comentarista" not-null="true" />
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>
