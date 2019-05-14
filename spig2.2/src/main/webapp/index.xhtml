@@ -65,21 +65,21 @@
                                     </h:link>
                                 </li>
                                 <li>
-                                    <p:link outcome="/CreaInformadorHI" >
+                                    <p:link outcome="/admin/CreaInformadorHI.xhtml" >
                                         <span class="rect"></span>
                                         <span class="circle"></span>
                                         Crear Informador
                                     </p:link>
                                 </li>
                                 <li>
-                                    <h:link outcome="ConsultaInformadorHI.xhtml" >
+                                    <h:link outcome="/admin/ConsultaInformadorHI.xhtml" >
                                         <span class="rect"></span>
                                         <span class="circle"></span>
                                         Consultar Informadores
                                     </h:link>
                                 </li>
                                 <li>
-                                    <h:link outcome="EliminaInformadorHI.xhtml" >
+                                    <h:link outcome="/admin/EliminaInformadorHI.xhtml" >
                                         <span class="rect"></span>
                                         <span class="circle"></span>
                                         Eliminar Informador
@@ -103,6 +103,48 @@
                                 <p:gmap id="map" center="41.381542, 2.122893" zoom="15" type="HYBRID" style="height: 500px;"/>
                             </center>
                             <div id="contact-content">
+                                <div class="section-heading">
+                                    <h1>
+                                        <div>Iniciar sesión</div>
+                                        <em>SPIG</em>
+                                    </h1>
+                                    <p>Ingresa y haz que el mundo
+                                    <br></br>conozca lo que te gusta.</p>
+                                </div>
+                                <div class="section-content">
+                                    <h:form id="contact">
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                              <fieldset>
+                                                  <p:inputText class="texto" value="#{controladorSesion.correo}" required="true" placeholder="correo"/>
+                                              </fieldset>
+                                            </div>
+                                            <div class="col-md-5">
+                                              <fieldset>
+                                                  <p:inputText class="texto" value="#{controladorSesion.passwd}" required="true" placeholder="contraseña"/>
+                                              </fieldset>
+                                            </div>
+                                            <div class="col-md-2">
+                                              <fieldset>
+                                                    <h:selectOneRadio value="#{controladorSesion.rol}" required="true" validatorMessage="falta el tipo de búsqueda" requiredMessage="falta el tipo de búsqueda">
+                                                        <f:selectItem itemValue="informador" itemLabel="informador." />
+                                                        <f:selectItem itemValue="comentarista" itemLabel="comentarista." />
+                                                        <f:selectItem itemValue="administrador" itemLabel="administrador." />
+                                                    </h:selectOneRadio>
+                                              </fieldset>
+                                            </div>
+                                            <div class="col-md-12">
+                                              <fieldset>
+                                                <p:commandButton id="form-submit" class="texto btn" action="#{controladorSesion.login()}" value="Consultar" style="margin-right:20px;" ajax="false"/>
+                                              </fieldset>
+                                            </div>
+                                        </div>
+                                        <p:growl id="growl" life="4000" />
+                                    </h:form>
+                                </div>
+
+                                <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
                                 <div class="section-heading">
                                     <h1>
                                         <div>Regístrate</div>

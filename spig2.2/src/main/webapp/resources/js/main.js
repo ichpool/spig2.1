@@ -73,12 +73,6 @@ jQuery(document).ready(function($) {
         var contentSection = $('.content-section, .main-banner');
         var navigation = $('nav');
         
-        //when a nav link is clicked, smooth scroll to the section
-        navigation.on('click', 'a', function(event){
-            event.preventDefault(); //prevents previous event
-            smoothScroll($(this.hash));
-        });
-        
         //update navigation on scroll...
         $(window).on('scroll', function(){
             updateNavigation();
@@ -101,12 +95,6 @@ jQuery(document).ready(function($) {
                 }
             });
         }
-        function smoothScroll(target){
-            $('body,html').animate({
-                scrollTop: target.offset().top
-            }, 800);
-        }
-
 
         $('.button a[href*=#]').on('click', function(e) {
           e.preventDefault();
