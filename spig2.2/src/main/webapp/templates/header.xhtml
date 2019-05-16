@@ -38,6 +38,11 @@
                                   <ui:include src="/templates/menu_info.xhtml" />
                                 </ui:insert>
                             </ui:fragment>
+                            <ui:fragment rendered="#{not empty user and user.rol eq 'comentarista'}">
+                                <ui:insert>
+                                  <ui:include src="/templates/menu_coment.xhtml" />
+                                </ui:insert>
+                            </ui:fragment>
                         </ul>
                     </nav>
                 </div>
@@ -55,6 +60,11 @@
                           <a href="#">Info-SP<em>IG</em></a>
                         </ui:insert>
                     </ui:fragment>
+                    <ui:fragment rendered="#{not empty user and user.rol eq 'comentarista'}">
+                        <ui:insert>
+                          <a href="#">Coment-SP<em>IG</em></a>
+                        </ui:insert>
+                    </ui:fragment>
                 </div>
                 <nav>
                     <ul>
@@ -69,6 +79,13 @@
                         <ui:fragment rendered="#{not empty user and user.rol eq 'informador'}">
                             <ui:insert>
                               <ui:include src="/templates/menu_info.xhtml" />
+                            </ui:insert>
+                        </ui:fragment>
+
+                        <!-- +++++++++++++++++++++++++  C O M E N T A R I S T A +++++++++++++++++++++++++++ -->
+                        <ui:fragment rendered="#{not empty user and user.rol eq 'comentarista'}">
+                            <ui:insert>
+                              <ui:include src="/templates/menu_coment.xhtml" />
                             </ui:insert>
                         </ui:fragment>
                     </ul>

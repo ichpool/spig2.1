@@ -73,7 +73,7 @@ public class ControladorSesion implements Serializable{
         if(comentarista != null){
             u = new UserLogged(comentarista.getNombre(),comentarista.getCorreo(),rol);
             context.getExternalContext().getSessionMap().put("user", u);
-            return "";
+            return "/coment/index_coment.xhtml?faces-redirect=true";
         }
         Mensajes.error("Fallo en el inicio de sesión");
         return "";
