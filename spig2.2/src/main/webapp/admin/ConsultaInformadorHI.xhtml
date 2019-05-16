@@ -42,12 +42,12 @@
                     <div class="section-content">
                         <h:form id="contact">
                             <div class="row">
-                                <div class="col-md-9">
+                                <div class="col-md-8 col-xs-6">
                                   <fieldset>
                                       <p:inputText class="texto" id="nombre" value="#{consultarInformador.info}" required="false" placeholder="Nombre o correo"/>
                                   </fieldset>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-4 col-xs-6">
                                   <fieldset>
                                         <h:selectOneRadio value="#{consultarInformador.tipoBusqueda}" required="true" validatorMessage="falta el tipo de búsqueda" requiredMessage="falta el tipo de búsqueda">
                                             <f:selectItem itemValue="nombre" itemLabel="por nombre    ." />
@@ -56,7 +56,7 @@
                                         </h:selectOneRadio>
                                   </fieldset>
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-md-12 col-xs-12">
                                   <fieldset>
                                     <p:commandButton id="form-submit" class="texto btn" action="#{consultarInformador.busca()}" value="Consultar" style="margin-right:20px;" ajax="false"/>
                                   </fieldset>

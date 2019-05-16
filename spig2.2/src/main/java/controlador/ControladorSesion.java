@@ -68,7 +68,7 @@ public class ControladorSesion implements Serializable{
         if(informador != null){
             u = new UserLogged(informador.getNombre(),informador.getCorreo(),rol);
             context.getExternalContext().getSessionMap().put("user", u);
-            return "";
+            return "/info/index_info.xhtml?faces-redirect=true";
         }
         if(comentarista != null){
             u = new UserLogged(comentarista.getNombre(),comentarista.getCorreo(),rol);
