@@ -135,7 +135,7 @@
                                             </div>
                                             <div class="col-md-12">
                                               <fieldset>
-                                                <p:commandButton id="form-submit" class="texto btn" action="#{controladorSesion.login()}" value="Consultar" style="margin-right:20px;" ajax="false"/>
+                                                <p:commandButton id="form-submit" class="texto btn" action="#{controladorSesion.login()}" value="Ingresar" style="margin-right:20px;" ajax="false"/>
                                               </fieldset>
                                             </div>
                                         </div>
@@ -155,7 +155,7 @@
 
                                 </div>
                                 <div class="section-content">
-                                    <h:form rendered="#{empty user}" id="form" class="formulario">
+                                    <h:form id="form" class="formulario">
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <p:inputText  class="texto" id="nombre" value="#{agregarComentarista.nombre}" required="true" placeholder="Nombre"  validatorMessage="Por favor ingresa tu nombre" requiredMessage="Por favor ingresa tu nombre"/> <br/>

@@ -1,2 +1,10 @@
-/spig2.2/target/
-/spig2.3/target/
+/spig2.2/target/generated-sources
+/spig2.2/target/maven-status
+/spig2.2/target/spig2.3-1.0-SNAPSHOT.war
+/spig2.2/target/test-classes
+/spig2.2/target/endorsed
+/spig2.2/target/maven-archiver
+/spig2.2/target/spig2.3-1.0-SNAPSHOT
+/spig2.2/target/surefire
+
+*.class

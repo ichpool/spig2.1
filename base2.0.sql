@@ -11,7 +11,7 @@ CREATE TABLE informador(
 
 CREATE TABLE tema(
     idtema SERIAL NOT NULL PRIMARY KEY,
-    nombre TEXT NOT NULL,
+    nombre TEXT NOT NULL UNIQUE,
     informador TEXT NOT NULL,
     CONSTRAINT fk_informador_tema FOREIGN KEY (informador) REFERENCES informador(correo) ON DELETE CASCADE
 );

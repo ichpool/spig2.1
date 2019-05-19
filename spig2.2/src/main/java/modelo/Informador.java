@@ -19,44 +19,50 @@ public class Informador  implements java.io.Serializable {
     public Informador() {
     }
 
-	
+
     public Informador(String correo, String nombre, String contrasenia) {
         this.correo = correo;
         this.nombre = nombre;
         this.contrasenia = contrasenia;
     }
+
+    public Informador(String correo, String nombre) {
+        this.correo = correo;
+        this.nombre = nombre;
+    }
+
     public Informador(String correo, String nombre, String contrasenia, Set temas) {
        this.correo = correo;
        this.nombre = nombre;
        this.contrasenia = contrasenia;
        this.temas = temas;
     }
-   
+
     public String getCorreo() {
         return this.correo;
     }
-    
+
     public void setCorreo(String correo) {
         this.correo = correo;
     }
     public String getNombre() {
         return this.nombre;
     }
-    
+
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
     public String getContrasenia() {
         return this.contrasenia;
     }
-    
+
     public void setContrasenia(String contrasenia) {
         this.contrasenia = contrasenia;
     }
     public Set getTemas() {
         return this.temas;
     }
-    
+
     public void setTemas(Set temas) {
         this.temas = temas;
     }
@@ -65,5 +71,3 @@ public class Informador  implements java.io.Serializable {
 
 
 }
-
-
