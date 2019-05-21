@@ -26,7 +26,8 @@ public class FilterSessionInfo implements Filter {
     }
 
     @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+    public void doFilter(ServletRequest request, ServletResponse response, 
+            FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
         HttpSession session = req.getSession(true);
@@ -34,7 +35,8 @@ public class FilterSessionInfo implements Filter {
             res.sendRedirect(req.getContextPath() + "/index.xhtml"); // Si no se encuentra el usuario redire al index.
         }
         else {
-            ControladorSesion.UserLogged u = (ControladorSesion.UserLogged) session.getAttribute("user");
+            ControladorSesion.UserLogged u = 
+                    (ControladorSesion.UserLogged) session.getAttribute("user");
             if(u.getRol().equals("informador")){
                 chain.doFilter(req, res); // esta logueado se continua con lo que se solicito.
             }else{

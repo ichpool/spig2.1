@@ -6,18 +6,15 @@
 package controlador;
 
 import java.io.Serializable;
-import javax.inject.Named;
-//import modelo.ComentarioDAO;
-//import modelo.Comentario;
-import modelo.Comentarista;
-import modelo.ComentaristaDAO;
+import java.util.List;
+import javax.faces.application.FacesMessage;
 import modelo.Marcador;
 import modelo.MarcadorDAO;
 import modelo.Tema;
 import modelo.TemaDAO;
-import modelo.Informador;
-import modelo.InformadorDAO;
-import java.util.Random;
+
+import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
 
 
 /**
@@ -25,7 +22,7 @@ import java.util.Random;
  * @author desales
  */
 
-@Named
+@ManagedBean
 public class AgregarMarcador implements Serializable{
    
     private int idmarcador;
@@ -79,13 +76,44 @@ public class AgregarMarcador implements Serializable{
     }
 
     
-    public void AgregarMarcador(){ //Necesitamos el tema, el usuario que lo agrega
-        Marcador m = new Marcador();
-        MarcadorDAO mdao = new MarcadorDAO();
-        Tema t = new TemaDAO().find(1); //sistuiur por el tema que se busca
-        Informador i = new InformadorDAO().buscaPorCorreoContrasenia("desales@gmail.com","desales");//Sustituir por el informador en cuestion
-        
-        mdao.save(m);
-        
+    public void AgregarMarcador(){
+        try {
+            Marcador m = new Marcador();
+            MarcadorDAO mdao = new MarcadorDAO();
+            /*Tenemos que checar si el tema existe*/
+
+
+            Tema t = new TemaDAO().find(this.tema);
+
+            if(t == null) {
+                FacesContext.getCurrentInstance().addMessage(null, 
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, 
+                            "Tema no encontrado. Por favor intentar más tarde o "
+                                    + "con otro tema.", null)); 
+                return;
+            }
+
+            List<Marcador> marcadores = mdao.findAll();
+
+            for(Marcador mc : marcadores)
+                if (mc.getLatitud() == latitud && mc.getLongitud() == longitud &&
+                        mc.getTema().equals(m.getTema())) {
+                    FacesContext.getCurrentInstance().addMessage(null,
+                            new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                                    "Marcador ya existente.", null));
+                    return;  
+                } 
+
+            /*Es un nuevo marcador*/
+            m.setLatitud(this.latitud);
+            m.setLongitud(this.longitud);
+            m.setTema(t);
+            mdao.save(m);
+        } catch( Exception e) {
+                FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                            "Error al agregar el nuevo Marcador. Por favor"
+                                    + "intentelo más tarde.", null));
+        }
     }
 }
