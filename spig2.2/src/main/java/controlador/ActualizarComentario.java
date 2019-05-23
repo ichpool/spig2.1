@@ -5,41 +5,54 @@
  */
 package controlador;
 
-import modelo.Comentarista;
-//import modelo.ComentaristaDAO;
+import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
 import modelo.Comentario;
 import modelo.ComentarioDAO;
-
-
 
 /**
  *
  * @author desales
  */
+@ManagedBean
 public class ActualizarComentario {
-    
+    /*]Id del comentario a actualizar*/
     private int idComentario;
+    /*El nuevo contenido.*/
     private String contenido;
-    private Comentarista comentarista;
-    
+
+    public void setIdComentario(int idComentario) {
+        this.idComentario = idComentario;
+    }
     
     public void setContenido(String contenido) {
         this.contenido = contenido;
     }
-    
-    public void SetComentarista(Comentarista comentarista) {
-        this.comentarista = comentarista;
-    }
-    
-    public void setIdcomentarista(int idComentario) {
-        this.idComentario = idComentario;
-    }
-    
+
+    /*Hacerlo string o void??*/
     public String ActualizarComentario() {
-        Comentario coment = new ComentarioDAO().find(idComentario);
-        if (coment.getComentarista().equals(comentarista)) { //Aquí podemos mandar un email de actualización
-            coment.setContenido(contenido);
-            new ComentarioDAO().update(coment);
+        Comentario com = new ComentarioDAO().find(idComentario);
+        if (com == null) {
+            Mensajes.fatal("Error al conectar con el servidor. Favor de intentar"
+                    + "lo más tarde.");
+            return "al index"; //O en caso a void
+        }
+        
+        ControladorSesion.UserLogged us = (ControladorSesion.UserLogged)
+                FacesContext.getCurrentInstance().getExternalContext()
+                        .getSessionMap().get("user");
+        /*Si no estamos logeados*/
+        if (us == null) {
+            Mensajes.error("Es necesario primero iniciar sesión.");
+            return "al index";
+        }
+        
+        /*Hasta este punto estamos logeados, por lo que ahora rectificamos si
+        somos la persona que ha publicado el comentario.*/
+        if (com.getComentarista().getCorreo().equals(us.getCorreo())) { 
+            com.setContenido(contenido);
+            /*Actualizamos en la BD*/
+            new ComentarioDAO().update(com);
             return "ActualizacionComentarioExitosa?faces-redirect=true";
         }
         return "ActualizacionComentarioInvalida?faces-redirect=true";

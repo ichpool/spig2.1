@@ -9,11 +9,8 @@ import modelo.ComentarioDAO;
 import modelo.Comentario;
 import modelo.Comentarista;
 import modelo.ComentaristaDAO;
-import modelo.Marcador;
 import modelo.MarcadorDAO;
 import modelo.Marcador;
-import java.util.Random;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 
@@ -72,39 +69,37 @@ public class CrearComentario {
 
     public void crearComentario() {
         /*Encontramos el comentarista primero*/
-        Comentarista com = 
-                new ComentaristaDAO().find(comentarista.getCorreo());
+        ControladorSesion.UserLogged us = (ControladorSesion.UserLogged) 
+                FacesContext.getCurrentInstance().getExternalContext()
+                        .getSessionMap().get("user");
+        if(us == null) {
+            Mensajes.error("Por favor iniciar sesión e intente más tarde.");
+            return;
+        }
         
-        /*Si no encontramos al comentarista*/
+        Comentarista com = new ComentaristaDAO().find(us.getCorreo());
         if( com == null) {
-            FacesContext.getCurrentInstance().addMessage(null, 
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR, 
-                            "No existe ese comentarista. Por favor intente"
+            Mensajes.error( "No existe ese comentarista. Por favor intente"
                                     + "iniciar sesión de nuevo o pruebe con "
-                                    + "otro usuario", null));
-                return;
+                                    + "otro usuario");
+            return;
         }
         
         /*Si el contenido es vacío*/   
         if("".equals(contenido)) {
-            FacesContext.getCurrentInstance().addMessage(null, 
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR, 
-                            "Comentario inválido.", null));
-                return;
+            Mensajes.error("Comentario inválido");
+            return;
         }
         
         Marcador m = new MarcadorDAO().find(marcador.getIdmarcador());
        
         /*Si no encontramos el marcador*/
         if (m == null) {
-                       FacesContext.getCurrentInstance().addMessage(null, 
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR, 
-                            "No existe ese marcador o ha habido un error "
+            Mensajes.error("No existe ese marcador o ha habido un error "
                                     + "al tratar de validarlo. Por favor "
-                                    + "intentar más tarde.", null));
-                return;
+                                    + "intentar más tarde.");
+            return;
         }
-        
         
         /*Creamos el comentario*/
         try {
@@ -116,15 +111,10 @@ public class CrearComentario {
             c.setComentarista(com);
             /*Guardamos en la BD*/
             cdao.save(c); 
-            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, 
-                    "Comentario publicado.", null);
-            FacesContext.getCurrentInstance().addMessage(null, message);
+            Mensajes.info("Comentario publicado.");
         } catch (Exception ex) {
-              FacesContext.getCurrentInstance().addMessage(null, 
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR, 
-                            "Error al publicar el comentario. Por favor"
-                                    + "intentar más tarde.", null));
+            Mensajes.error("Error en la creación del comentario, por favor "
+                    + "intentarlo más tarde");
         }
-
     }
 }
