@@ -1,15 +1,10 @@
 package controlador;
 
-import auxiliares.FileToStringer;
 import modelo.Informador;
 import modelo.Tema;
 import modelo.TemaDAO;
-import auxiliares.SendEmail;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
 /**
@@ -34,7 +29,7 @@ public class AgregarTema {
         try {
             ControladorSesion.UserLogged us = (ControladorSesion.UserLogged) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
             Informador info = us.toInformador();
-            Tema new_tema = new Tema(info, this.nombre);
+            Tema new_tema = new Tema(info, this.nombre.toLowerCase());
             TemaDAO udb = new TemaDAO();
             udb.save(new_tema);
             Mensajes.info("Tema Guardado");

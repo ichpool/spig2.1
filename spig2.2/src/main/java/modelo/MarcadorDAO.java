@@ -6,6 +6,10 @@
 package modelo;
         
 import java.util.List;
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 
 /**
@@ -65,4 +69,26 @@ public class MarcadorDAO extends AbstractDAO<Marcador>{
         return super.findAll(Marcador.class);
     }
     
+    public Marcador buscaPorLatLong(double lat, double len){
+        Marcador marcador = null;
+        Session session = this.sessionFactory.openSession();
+        Transaction tx = null;
+        try{
+            tx = session.beginTransaction();
+            String hql = "From Marcador where latitud = :lat and longitud = :len";
+            Query query = session.createQuery(hql);
+            query.setParameter("lat", lat);
+            query.setParameter("len", len);
+            marcador = (Marcador)query.uniqueResult();
+            tx.commit();
+        }catch(HibernateException e){
+            if(tx!=null){
+                tx.rollback();
+            }
+            e.printStackTrace();
+        }finally{
+            session.close();
+        }
+        return marcador;
+    }
 }

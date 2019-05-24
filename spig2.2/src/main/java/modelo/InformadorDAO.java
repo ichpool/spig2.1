@@ -77,7 +77,7 @@ public class InformadorDAO extends AbstractDAO<Informador>{
         Transaction tx = null;
         try{
             tx = session.beginTransaction();
-            String hql = "From Informador  u where u.nombre like concat('%',:nombre,'%')";
+            String hql = "From Informador i where i.nombre like concat('%',:nombre,'%')";
             Query query = session.createQuery(hql);
             query.setParameter("nombre", nombre);
             informadores = (List<Informador>)query.list();
@@ -101,7 +101,7 @@ public class InformadorDAO extends AbstractDAO<Informador>{
         Transaction tx = null;
         try{
             tx = session.beginTransaction();
-            String hql = "From Informador  u where u.correo like concat('%',:correo,'%')";
+            String hql = "From Informador i where i.correo like concat('%',:correo,'%')";
             Query query = session.createQuery(hql);
             query.setParameter("correo", correo);
             informadores = (List<Informador>)query.list();
@@ -142,7 +142,7 @@ public class InformadorDAO extends AbstractDAO<Informador>{
     }
 
     public Informador buscaPorCorreoContrasenia(String correo,String contrasenia){
-        Informador u =null;
+        Informador u = null;
         Session session = this.sessionFactory.openSession();
         Transaction tx =null;
         try{

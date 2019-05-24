@@ -33,28 +33,46 @@
                 <section id="contact" class="content-section">
                     <div class="section-heading">
                         <h1>
-                            <div>Agregar Tema</div>
+                            <div>Agregar Marcador</div>
                             <em>SPIG</em>
                         </h1>
 
                     </div>
-                    <div class="section-content">
+                    <div class="section-content col-md-8 col-md-offset-2">
+                        <p:gmap  style="width: 100%; height: 400px;"  mapTypeControl="false" center="${agregaMarcador.centro.lat},${agregaMarcador.centro.lng}" zoom="5" type="roadmap" id="mapa" model="${agregaMarcador.simpleModel}">
+                            <p:ajax event="markerDrag" listener="${agregaMarcador.onMarkerDrag}" update="form:longitud form:latitud"/>
+                            <p:ajax event="pointSelect" listener="${agregaMarcador.onPointSelect}" update="form:longitud form:latitud mapa"/>
+                        </p:gmap>
+                    </div>
+
+                    <div class="section-content" id="form-agrega-marcador">
                         <h:form id="form" class="formulario">
                             <div class="row text-center">
                                 <div class="col-md-10 col-md-offset-1">
-                                    <p:inputText  class="texto" id="nombre" value="#{agregarTema.nombre}" required="true" placeholder="Nombre del Tema"  validatorMessage="Ingresa el nombre del tema" requiredMessage="Ingresa el nombre del tema"/> <br/>
+                                    <p:inputTextarea placeholder="Tema del Marcador..." completeMethod="#{agregaMarcador.autocompletaTema}" queryDelay="750" minQueryLength="3" value="${agregaMarcador.nombreTema}" rows="1" maxlength="255" required="true" requiredMessage="Ingresa nombre del marcador"/>
                                 </div>
-                                <!--div class="col-md-10 col-md-offset-1">
-                                    <p:inputTextarea placeholder="Descripcion del Tema..." value="#{agregarTema.descripcion}" rows="6" counter="display" maxlength="255" counterTemplate="{0} caracteres restantes." required="true" requiredMessage="Ingresa la descripcion del tema"/>
-                                    <h:outputText id="display" style="color:white;"/>
-                                </div-->
+                                <div class="col-md-5 col-md-offset-1">
+                                    <p:inputTextarea placeholder="Descripcion del Marcador..." value="${agregaMarcador.descripcion}" rows="6" counter="display-description" maxlength="255" counterTemplate="{0} caracteres restantes." required="true" requiredMessage="Ingresa la descripcion del marcador"/>
+                                    <h:outputText id="display-description" style="color:white;"/>
+                                </div>
+                                <div class="col-md-5">
+                                    <p:inputTextarea placeholder="Datos extra..." value="${agregaMarcador.datos}" rows="6" counter="display-extra" maxlength="255" counterTemplate="{0} caracteres restantes." required="false"/>
+                                    <h:outputText id="display-extra" style="color:white;"/>
+                                </div>
+                                <div class="col-md-5 col-md-offset-1">
+                                    <p:inputText id="latitud" value="${agregaMarcador.latitud}" placeholder="Latitud" required="true"/> <br/>
+                                </div>
+                                <div class="col-md-5">
+                                    <p:inputText id="longitud" value="${agregaMarcador.longitud}" placeholder="Longitud" required="true"/> <br/>
+                                </div>
                                 <div class="col-md-10 col-md-offset-1">
-                                    <p:commandButton id="form-submit" class="texto btn" action="#{agregarTema.agregaTema()}" value="Agregar Tema" ajax="false" />
+                                    <p:commandButton id="form-submit" action="${agregaMarcador.agregaMarcador()}" class="texto btn" value="Agregar Marcador" ajax="false" />
                                 </div>
                             </div>
                             <p:growl id="growl" life="4000" />
                         </h:form>
                     </div>
+
                 </section>
                 <section class="footer">
                     <p>Copyright &copy; 2019 SPIG.org</p>

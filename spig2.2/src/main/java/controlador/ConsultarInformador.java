@@ -55,23 +55,17 @@ public class ConsultarInformador {
     public String busca(){
         try {
             InformadorDAO inf_db = new InformadorDAO();
-            if(tipoBusqueda.equals("todos")){
+            if(tipoBusqueda.equals("todos"))
                 resultado = inf_db.findAll();
-            }
-            if(info.equals("")){
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Llena todos los campos", null));
-                return null;
-            }
-            if(tipoBusqueda.equals("nombre")){
+
+            if(tipoBusqueda.equals("nombre"))
                 resultado = inf_db.buscaPorNombreLike(info);
-            }
-            else{
+            else
                 resultado = inf_db.buscaPorCorreoLike(info);
-            }
+
             return "ConsultaInformadorHI?faces-redirect=true";
         } catch (Exception ex) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ocurrio un error en el servidor", null));
-            Logger.getLogger(RegistrarInformador.class.getName()).log(Level.SEVERE, null, ex);
+            Mensajes.error("Ocurrio un error en el servidor");
         }
         return null;
     }

@@ -12,6 +12,7 @@ p {
 .page-content {
   width: 77.5%;
   float: right;
+  padding-bottom: 150px;
 }
 
 .content-section {
@@ -27,6 +28,14 @@ p {
   -ms-transform: translateX(-50%);
   -o-transform: translateX(-50%);
   transform: translateX(-50%);
+}
+
+#form-agrega-marcador {
+    top: 50px;
+    position: relative;
+    width: 100%;
+    display: inline-block;
+    height: auto;
 }
 
 .section-heading {
@@ -894,8 +903,8 @@ header {
 
 .footer {
   background-color: rgba(12,12,12,0.9);
-  height: 80px;
-  line-height: 80px;
+  height: 45px;
+  line-height: 45px;
   display: inline-block;
   text-align: center;
   width: 100%;
