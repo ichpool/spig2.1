@@ -109,7 +109,7 @@ public abstract class AbstractDAO<T> {
             tx = session.beginTransaction();
             obj =(T)session.get(clazz, id);
             tx.commit();
-
+ 
         }catch(HibernateException e){
             if(tx!=null){
                 tx.rollback();

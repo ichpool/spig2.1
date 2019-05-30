@@ -29,11 +29,29 @@
               <ui:include src="/templates/header.xhtml" />
             </ui:insert>
 
-
             <div class="page-content">
-                <ui:insert name="header" >
-                    <ui:include src="/templates/mapa_marcadores.xhtml" />
-                </ui:insert>
+                <section id="contact" class="content-section">
+                    <div class="section-heading">
+                        <h1>
+                            <div>Agregar Tema</div>
+                            <em>SPIG</em>
+                        </h1>
+
+                    </div>
+                    <div class="section-content">
+                        <h:form id="form" class="formulario">
+                            <div class="row text-center">
+                                <div class="col-md-10 col-md-offset-1">
+                                    <p:inputText  class="texto" id="nombre" value="#{agregarTema.nombre}" required="true" placeholder="Nombre del Tema"  validatorMessage="Ingresa el nombre del tema" requiredMessage="Ingresa el nombre del tema"/> <br/>
+                                </div>
+                                <div class="col-md-10 col-md-offset-1">
+                                    <p:commandButton id="form-submit" class="texto btn" action="#{agregarTema.agregaTema()}" value="Agregar Tema" ajax="false" />
+                                </div>
+                            </div>
+                            <p:growl id="growl" life="4000" />
+                        </h:form>
+                    </div>
+                </section>
                 <section class="footer">
                     <p>Copyright &copy; 2019 SPIG.org</p>
                 </section>

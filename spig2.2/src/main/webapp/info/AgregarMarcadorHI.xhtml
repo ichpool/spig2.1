@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <f:view>
+    <h:head>
+        <meta charset="utf-8"> </meta>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> </meta>
+        <title>SPIG ~ INFO</title>
+
+        <meta name="description" content=""> </meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1"> </meta>
+
+        <h:outputStylesheet name="css/bootstrap.min.css"/>
+        <h:outputStylesheet name="css/bootstrap-theme.min.css"/>
+        <h:outputStylesheet name="css/templatemo-style.css"/>
+
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet"/>
+
+    </h:head>
+
+    <h:body>
+            <ui:insert name="header" >
+              <ui:include src="/templates/header.xhtml" />
+            </ui:insert>
+
+            <div class="page-content">
+                <section id="contact" class="content-section">
+                    <div class="section-heading">
+                        <h1>
+                            <div>Agregar Marcador</div>
+                            <em>SPIG</em>
+                        </h1>
+
+                    </div>
+                    <div class="section-content col-md-8 col-md-offset-2">
+                        <p:gmap mapTypeControl="false" center="${agregaMarcador.centro.lat},${agregaMarcador.centro.lng}" zoom="5" type="roadmap" id="mapa" model="${agregaMarcador.simpleModel}">
+                            <p:ajax event="markerDrag" listener="${agregaMarcador.onMarkerDrag}" update="form:longitud form:latitud"/>
+                            <p:ajax event="pointSelect" listener="${agregaMarcador.onPointSelect}" update="form:longitud form:latitud mapa"/>
+                        </p:gmap>
+                    </div>
+
+                    <div class="section-content" id="form-agrega-marcador">
+                        <h:form id="form" class="formulario">
+                            <div class="row text-center">
+                                <div class="col-md-10 col-md-offset-1">
+                                    <p:inputTextarea placeholder="Tema del Marcador..." completeMethod="#{agregaMarcador.autocompletaTema}" queryDelay="750" minQueryLength="3" value="${agregaMarcador.nombreTema}" rows="1" maxlength="255" required="true" requiredMessage="Ingresa nombre del marcador"/>
+                                </div>
+                                <div class="col-md-5 col-md-offset-1">
+                                    <p:inputTextarea placeholder="Descripcion del Marcador..." value="${agregaMarcador.descripcion}" rows="6" counter="display-description" maxlength="255" counterTemplate="{0} caracteres restantes." required="true" requiredMessage="Ingresa la descripcion del marcador"/>
+                                    <h:outputText id="display-description" style="color:white;"/>
+                                </div>
+                                <div class="col-md-5">
+                                    <p:inputTextarea placeholder="Datos extra..." value="${agregaMarcador.datos}" rows="6" counter="display-extra" maxlength="255" counterTemplate="{0} caracteres restantes." required="false"/>
+                                    <h:outputText id="display-extra" style="color:white;"/>
+                                </div>
+                                <div class="col-md-5 col-md-offset-1">
+                                    <p:inputText id="latitud" value="${agregaMarcador.latitud}" placeholder="Latitud" required="true"/> <br/>
+                                </div>
+                                <div class="col-md-5">
+                                    <p:inputText id="longitud" value="${agregaMarcador.longitud}" placeholder="Longitud" required="true"/> <br/>
+                                </div>
+                                <div class="col-md-10 col-md-offset-1">
+                                    <p:commandButton id="form-submit" action="${agregaMarcador.agregaMarcador()}" class="texto btn" value="Agregar Marcador" ajax="false" />
+                                </div>
+                            </div>
+                            <p:growl id="growl" life="4000" />
+                        </h:form>
+                    </div>
+
+                </section>
+                <section class="footer">
+                    <p>Copyright &copy; 2019 SPIG.org</p>
+                </section>
+            </div>
+
+    </h:body>
+    </f:view>
+</html>

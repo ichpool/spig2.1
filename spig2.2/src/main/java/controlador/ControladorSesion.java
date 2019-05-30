@@ -84,6 +84,7 @@ public class ControladorSesion implements Serializable{
         return "/index?faces-redirect=true";
     }
 
+
     public class UserLogged implements Serializable{
         private String nombre;
         private String correo;
@@ -94,8 +95,6 @@ public class ControladorSesion implements Serializable{
             this.correo = correo;
             this.rol = rol;
         }
-
-
 
         public String getNombre() {
             return nombre;
@@ -121,6 +120,9 @@ public class ControladorSesion implements Serializable{
             this.rol = rol;
         }
 
+        public Informador toInformador(){
+            return new Informador(this.correo, this.nombre);
+        }
 
     }
 }

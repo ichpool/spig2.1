@@ -29,11 +29,27 @@
               <ui:include src="/templates/header.xhtml" />
             </ui:insert>
 
-
             <div class="page-content">
-                <ui:insert name="header" >
-                    <ui:include src="/templates/mapa_marcadores.xhtml" />
-                </ui:insert>
+                <section id="contact" class="content-section">
+                    <div class="section-heading">
+                        <h1>
+                            <div>Mis Temas</div>
+                            <em>SPIG</em>
+                        </h1>
+
+                    </div>
+                    <div class="section-content">
+                        <div class="row text-center">
+                            <div class="col-md-8 col-md-offset-2">
+                                <p:dataTable var="tema" value="#{consultarTemas.obtenerTemas()}">
+                                    <p:column headerText="Nombre del Tema">
+                                        <h:outputText value="#{tema.getNombre()}" />
+                                    </p:column>
+                                </p:dataTable>
+                            </div>
+                        </div>
+                    </div>
+                </section>
                 <section class="footer">
                     <p>Copyright &copy; 2019 SPIG.org</p>
                 </section>

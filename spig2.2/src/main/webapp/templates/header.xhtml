@@ -8,13 +8,11 @@
 
     <body>
         <ui:composition>
-            <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=">
+            <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js">
             </script>
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+            <!--script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script-->
             <h:outputScript name="js/vendor/bootstrap.min.js"/>
-            <h:outputScript name="js/main.js"/>
             <h:outputScript name="js/scroll.js"/>
-            <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
 
 
             <header class="nav-down responsive-nav hidden-lg hidden-md">
@@ -50,6 +48,11 @@
 
             <div class="sidebar-navigation hidde-sm hidden-xs">
                 <div class="logo">
+                    <ui:fragment rendered="#{empty user}">
+                        <ui:insert>
+                          <a href="">SP<em>IG</em></a>
+                        </ui:insert>
+                    </ui:fragment>
                     <ui:fragment rendered="#{not empty user and user.rol eq 'administrador'}">
                         <ui:insert>
                           <a href="#">Admin-SP<em>IG</em></a>
@@ -88,8 +91,25 @@
                               <ui:include src="/templates/menu_coment.xhtml" />
                             </ui:insert>
                         </ui:fragment>
+
+                        <!-- +++++++++++++++++++++++++  U N L O G G E D +++++++++++++++++++++++++++ -->
+                        <ui:fragment rendered="#{empty user}">
+                            <ui:insert>
+                              <ui:include src="/templates/menu_unlogged.xhtml" />
+                            </ui:insert>
+                        </ui:fragment>
                     </ul>
+
                 </nav>
+                <div id="cerrar_sesion">
+                    <ui:fragment rendered="#{not empty user}">
+                    <h:form>
+                    <p:menubar>
+                    <p:menuitem value="Cerrar Sesion" action="#{controladorSesion.logout()}" styleClass="menuitem"/>
+                </p:menubar>
+            </h:form>
+        </ui:fragment>
+    </div>
             </div>
 
         </ui:composition>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <body>
+        <ui:composition>
+
+            <section class="content-section">
+                <div class="section-content col-md-8 col-md-offset-2">
+                    <p:gmap center="23.382390, -102.291477" zoom="5" type="roadmap" id="mapa" model="#{consultarMarcadores.simpleModel}" mapTypeControl="false">
+                        <p:ajax event="overlaySelect" listener="#{consultarMarcadores.onMarkerSelect}" update="marcadordlg"/>
+                    </p:gmap>
+                    <p:dialog id="marcadordlg" widgetVar="dlg" modal="true" header="Ver marcador" hideEffect="explode">
+
+                        <p:fieldset legend="Marcador" style="margin-bottom:20px">
+                            <h:panelGrid  columns="2" cellpadding="10px">
+                            <h:panelGrid  columns="2" cellpadding="10px">
+                                <h:outputText value="La descripcion : "/>
+                                <h:outputText value="#{consultarMarcadores.marcador.descripcion}" style="font-weight: bold;"/>
+                                <h:outputText value="Datos extra :  "/>
+                                <h:outputText value="#{consultarMarcadores.marcador.datosExtra}" style="font-weight: bold;" />
+                            </h:panelGrid>
+                           </h:panelGrid>
+                        </p:fieldset>
+
+                    </p:dialog>
+                </div>
+            </section>
+
+        </ui:composition>
+    </body>
+</html>
