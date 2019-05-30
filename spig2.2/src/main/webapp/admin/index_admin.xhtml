@@ -31,11 +31,9 @@
 
 
             <div class="page-content">
-                <section id="contact" class="content-section">
-                    <center>
-                        <p:gmap id="map" center="41.381542, 2.122893" zoom="15" type="HYBRID" style="height: 500px;"/>
-                    </center>
-                </section>
+                <ui:insert name="header" >
+                    <ui:include src="/templates/mapa_marcadores.xhtml" />
+                </ui:insert>
                 <section class="footer">
                     <p>Copyright &copy; 2019 SPIG.org</p>
                 </section>

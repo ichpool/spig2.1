@@ -57,8 +57,7 @@ public class ConsultarInformador {
             InformadorDAO inf_db = new InformadorDAO();
             if(tipoBusqueda.equals("todos"))
                 resultado = inf_db.findAll();
-
-            if(tipoBusqueda.equals("nombre"))
+            else if(tipoBusqueda.equals("nombre"))
                 resultado = inf_db.buscaPorNombreLike(info);
             else
                 resultado = inf_db.buscaPorCorreoLike(info);

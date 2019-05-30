@@ -48,6 +48,11 @@
 
             <div class="sidebar-navigation hidde-sm hidden-xs">
                 <div class="logo">
+                    <ui:fragment rendered="#{empty user}">
+                        <ui:insert>
+                          <a href="">SP<em>IG</em></a>
+                        </ui:insert>
+                    </ui:fragment>
                     <ui:fragment rendered="#{not empty user and user.rol eq 'administrador'}">
                         <ui:insert>
                           <a href="#">Admin-SP<em>IG</em></a>
@@ -86,8 +91,25 @@
                               <ui:include src="/templates/menu_coment.xhtml" />
                             </ui:insert>
                         </ui:fragment>
+
+                        <!-- +++++++++++++++++++++++++  U N L O G G E D +++++++++++++++++++++++++++ -->
+                        <ui:fragment rendered="#{empty user}">
+                            <ui:insert>
+                              <ui:include src="/templates/menu_unlogged.xhtml" />
+                            </ui:insert>
+                        </ui:fragment>
                     </ul>
+
                 </nav>
+                <div id="cerrar_sesion">
+                    <ui:fragment rendered="#{not empty user}">
+                    <h:form>
+                    <p:menubar>
+                    <p:menuitem value="Cerrar Sesion" action="#{controladorSesion.logout()}" styleClass="menuitem"/>
+                </p:menubar>
+            </h:form>
+        </ui:fragment>
+    </div>
             </div>
 
         </ui:composition>

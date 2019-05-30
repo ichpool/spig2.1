@@ -839,7 +839,7 @@ header {
 }
 
 #contact-content {
-  padding: 80px 60px;
+  padding: 0px 80px;
 }
 
 #contact input {
@@ -1101,4 +1101,20 @@ body {
 
 td label {
     color: #FFF;
+}
+
+#mapa {
+    width: 100%;
+    height: 500px;
+    top: 10px;
+}
+
+#cerrar_sesion {
+    bottom: 45px;
+    position: absolute;
+    width: 100%
+}
+
+.ui-widget-overlay {
+    display: none;
 }

@@ -94,7 +94,7 @@ public class AgregaMarcador implements Serializable {
     public void setLatitud(double latitud) {
         this.latitud = latitud;
     }
-    
+
     public String getNombreTema() {
         return nombreTema;
     }
@@ -114,7 +114,7 @@ public class AgregaMarcador implements Serializable {
     public List<String> autocompletaTema (String query) {
         ControladorSesion.UserLogged us = (ControladorSesion.UserLogged) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
         TemaDAO tdb = new TemaDAO();
-        List<Tema> temas = tdb.buscaPorNombreLikeAndInformador(query, us.getCorreo());
+        List<Tema> temas = tdb.buscaPorNombreLikeAndInformador(query.toLowerCase(), us.getCorreo());
         List<String> resultados = new ArrayList<>();
         for(Tema tem : temas){
             resultados.add(tem.getNombre());
@@ -127,14 +127,13 @@ public class AgregaMarcador implements Serializable {
             MarcadorDAO mdb = new MarcadorDAO();
             Marcador m = mdb.buscaPorLatLong(latitud, longitud);
             if(m!= null){
-                this.descripcion ="";
                 Mensajes.error("Ya existe un marcador con estas cordenadas \n" +"Lat: "+this.latitud +" Lng: "+this.longitud);
                 return "";
             }
             m = new Marcador();
             ControladorSesion.UserLogged us = (ControladorSesion.UserLogged) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
             TemaDAO tdb = new TemaDAO();
-            Tema tem = tdb.buscaPorNombreAndInformador(this.nombreTema,us.getCorreo());
+            Tema tem = tdb.buscaPorNombreAndInformador(this.nombreTema.toLowerCase(),us.getCorreo());
             if(tem == null){
                 Mensajes.error("No existe el Tema");
                 return "";
@@ -162,6 +161,5 @@ public class AgregaMarcador implements Serializable {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-
 
 }
