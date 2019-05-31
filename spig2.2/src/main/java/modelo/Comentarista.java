@@ -1,3 +1,4 @@
+
 package modelo;
 // Generated 14/05/2019 01:28:26 PM by Hibernate Tools 4.3.1
 

@@ -25,8 +25,31 @@
                                 <h:outputText value="#{consultarMarcadores.marcador.datosExtra}" style="font-weight: bold;" />
                             </h:panelGrid>
                            </h:panelGrid>
+                        
+                              
+                        <h:form> 
+                            
+                        <p:scrollPanel style="width:300px;height:150px">
+                        <p:dataList value="#{comentarioDAO.findByMarker(consultarMarcadores.marcador.idMarcador)}" var="com" emptyMessage="Sin comentarios previos de este lugar" >
+ 
+                            
+                            <h:outputText value="#{com.comentarista.nombre}" style="font-size: 12px; font-weight: bold; border-color: blue"/><br/>
+                            <h:outputText value="#{com.contenido} "/><br/>
+                            
+                            <p:menuButton value="Opciones" rendered="#{not empty user and user.rol eq 'comentarista'}" style="float: right; size: ledger" >
+                                <p:menuitem value="Eliminar" action="#{EliminarComentario.eliminarComentario(com.id)}" update="formComentario" rendered="#{com.comentarista.correo eq user.correo}"/>
+                            </p:menuButton><br/>
+                        </p:dataList>
+                        </p:scrollPanel>
+                        
+                            <h:form id="formComent" rendered="#{not empty user and user.rol eq 'comentarista'}" style="align-content: center">
+                                <p:inputTextarea  id="comentario" value="#{CrearComentario.contenido}" required=" true"  placeholder="Comenta aquí" requiredMessage="Ingresa un comentario" style="width:300px" autoResize="false" /> <br/>
+                                <p:commandButton action="#{CrearComentario.crearComentario(consultarMarcadores.marcador)}" value="Agregar comentario" update="formComentario"/>                        
+                            </h:form>     
+                            
+                        </h:form>
                         </p:fieldset>
-
+                        
                     </p:dialog>
                 </div>
             </section>

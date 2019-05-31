@@ -81,5 +81,29 @@ public class ComentarioDAO extends AbstractDAO<Comentario> {
         return super.findAll(Comentario.class);
     }
     
-
+    
+    /**
+     * Método que busca los comentarios dado un marcador
+     * @param idmarcador id del marcador en cuestión
+     * @return comentarios COmentarios correspóndientes a un marcador
+     */
+    public List<Comentario> findByMarker(int idmarcador) {
+        List<Comentario> obj = null;
+        Session session = this.sessionFactory.openSession();
+        Transaction tx = null;
+        try{
+            tx = session.beginTransaction();
+            String hql = "from Comentario where idmarcador = :id";
+            Query query = session.createQuery(hql);
+            query.setParameter("id", idmarcador);
+            obj = (List<Comentario>) query.list();
+            tx.commit();
+        }catch(HibernateException e){
+            if(tx != null)
+                tx.rollback();
+        }finally{
+            session.close();
+        }
+        return obj;
+    }
 }

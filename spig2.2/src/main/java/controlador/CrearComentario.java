@@ -9,11 +9,10 @@ import modelo.ComentarioDAO;
 import modelo.Comentario;
 import modelo.Comentarista;
 import modelo.ComentaristaDAO;
-import modelo.Marcador;
 import modelo.MarcadorDAO;
 import modelo.Marcador;
-import java.util.Random;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -23,10 +22,10 @@ import javax.faces.bean.ManagedBean;
 public class CrearComentario {
     
     private int idcomentario;
-     private String contenido;
-     private double calificacion;
-     private Comentarista comentarista;
-     private Marcador marcador;
+    private String contenido;
+    private double calificacion;
+    private Comentarista comentarista;
+    private Marcador marcador;
     
     public int getIdcomentario() {
         return this.idcomentario;
@@ -67,21 +66,111 @@ public class CrearComentario {
     public void setMarcador(Marcador marcador) {
         this.marcador = marcador;
     }
-
-    public void crearComentario() {//Creación de comentario exitoso, reload de la página
-        //Manda error porque el ID no se actualiza. 
-        Comentario c = new Comentario();
-        ComentarioDAO cdao = new ComentarioDAO();
-        c.setContenido(contenido);
-        MarcadorDAO mdao = new MarcadorDAO();
-        //Cachar excepciones
-        //Marcador m = mdao.find(marcador.getIdmarcador());
-        Marcador m = mdao.find(1);
-        c.setMarcador(m);
-        ComentaristaDAO comdao = new ComentaristaDAO();
-        //Comentarista com = comdao.find(comentarista.getCorreo());
-        Comentarista com = comdao.find("desales@gmail.com");
-        c.setComentarista(com);
-        cdao.save(c);
+    
+    public void crearComentario() {
+        /*Encontramos el comentarista primero*/
+        ControladorSesion.UserLogged us = (ControladorSesion.UserLogged) 
+                FacesContext.getCurrentInstance().getExternalContext()
+                        .getSessionMap().get("user");
+        if(us == null) {
+            Mensajes.error("Por favor iniciar sesión e intente más tarde.");
+            return;
+        }
+        
+        Comentarista com = new ComentaristaDAO().find(us.getCorreo());
+        if( com == null) {
+            Mensajes.error( "No existe ese comentarista. Por favor intente"
+                                    + "iniciar sesión de nuevo o pruebe con "
+                                    + "otro usuario");
+            return;
+        }
+        
+        /*Si el contenido es vacío*/   
+        if("".equals(contenido)) {
+            Mensajes.error("Comentario inválido");
+            return;
+        }
+        
+        Marcador m = new MarcadorDAO().find(marcador.getIdmarcador());
+       
+        /*Si no encontramos el marcador*/
+        if (m == null) {
+            Mensajes.error("No existe ese marcador o ha habido un error "
+                                    + "al tratar de validarlo. Por favor "
+                                    + "intentar más tarde.");
+            return;
+        }
+        
+        /*Creamos el comentario*/
+        try {
+            Comentario c = new Comentario();
+            ComentarioDAO cdao = new ComentarioDAO();
+            /*Asignamos valores*/
+            c.setContenido(contenido); 
+            c.setMarcador(m);    
+            c.setComentarista(com);
+            /*Guardamos en la BD*/
+            cdao.save(c); 
+            Mensajes.info("Comentario publicado.");
+        } catch (Exception ex) {
+            Mensajes.error("Error en la creación del comentario, por favor "
+                    + "intentarlo más tarde");
+        }
+    }
+    
+    
+        /**
+         * Crea el comentario del marcador dado
+         * @param mark 
+         */
+        public void crearComentario(Marcador mark) {
+        /*Encontramos el comentarista primero*/
+        ControladorSesion.UserLogged us = (ControladorSesion.UserLogged) 
+                FacesContext.getCurrentInstance().getExternalContext()
+                        .getSessionMap().get("user");
+        if(us == null) {
+            Mensajes.error("Por favor iniciar sesión e intente más tarde.");
+            return;
+        }
+        
+        Comentarista com = new ComentaristaDAO().find(us.getCorreo());
+        if( com == null) {
+            Mensajes.error( "No existe ese comentarista. Por favor intente"
+                                    + "iniciar sesión de nuevo o pruebe con "
+                                    + "otro usuario");
+            return;
+        }
+        
+        /*Si el contenido es vacío*/   
+        if("".equals(contenido)) {
+            Mensajes.error("Comentario inválido");
+            return;
+        }
+        
+        Marcador m = new MarcadorDAO().find(marcador.getIdmarcador());
+       
+        /*Si no encontramos el marcador*/
+        if (m == null) {
+            Mensajes.error("No existe ese marcador o ha habido un error "
+                                    + "al tratar de validarlo. Por favor "
+                                    + "intentar más tarde.");
+            return;
+        }
+        
+        /*Creamos el comentario*/
+        try {
+            Comentario c = new Comentario();
+            ComentarioDAO cdao = new ComentarioDAO();
+            /*Asignamos valores*/
+            c.setContenido(contenido); 
+            c.setMarcador(mark);    
+            c.setComentarista(com);
+            /*Guardamos en la BD*/
+            cdao.save(c); 
+            Mensajes.info("Comentario publicado.");
+        } catch (Exception ex) {
+            Mensajes.error("Error en la creación del comentario, por favor "
+                    + "intentarlo más tarde");
+        }
     }
 }
